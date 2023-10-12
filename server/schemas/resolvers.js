@@ -1,6 +1,6 @@
 const { resolveObjMapThunk, isInputType } = require("graphql");
 const { User } = require("../models");
-const { singleToken, AuthenticationError } = require("../utils/auth");
+const { signToken, AuthenticationError } = require("../utils/auth");
 const Resolvers = {
   Query: {
     me: async (parent, args, context) => {
@@ -13,7 +13,7 @@ const Resolvers = {
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
-      const token = singleToken(user);
+      const token = signToken(user);
       return { token, user };
     },
     login: async (parent, { email, password }) => {
@@ -25,7 +25,7 @@ const Resolvers = {
       if (!correctPw) {
         AuthenticationError;
       }
-      const token = singleToken(user);
+      const token = signToken(user);
       return { token, user };
     },
     saveBook: async (parent, input) => {
