@@ -29,7 +29,7 @@ type Auth
     user:User
 }
 type Query{
-    me(userId:ID,username:String):User
+    me:User
 }
 type Mutation{
     createUser(username:String!,email:String!,password:String!):Auth
