@@ -11,9 +11,7 @@ import { REMOVE_BOOK } from "../utils/mutations";
 import context from "react-bootstrap/esm/AccordionContext";
 const SavedBooks = () => {
   // const [userData, setUserData] = useState({});
-  const { loading, data } = useQuery(GET_ME, {
-    variables: { _id: context.user._id },
-  });
+  const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || data?.user || {};
 
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);

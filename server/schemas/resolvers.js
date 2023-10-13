@@ -19,28 +19,42 @@ const Resolvers = {
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {
-        AuthenticationError;
+        throw AuthenticationError;
       }
       const correctPw = await User.isCorrectPassword(password);
       if (!correctPw) {
-        AuthenticationError;
+        throw AuthenticationError;
       }
       const token = signToken(user);
       return { token, user };
     },
-    saveBook: async (parent, input) => {
-      const user = User.findByIdAndUpdate(
-        { _id: context.user._id },
-        { $addToSet: { savedBooks: input } },
-        { new: true }
-      );
+    saveBook: async (parent, { input }, context) => {
+      console.log(context.user);
+      if (context.user) {
+        const user = User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $addToSet: {
+              savedBooks: input,
+            },
+          },
+          { new: true }
+        );
+        return user;
+      }
+      throw AuthenticationError;
     },
+
     removeBook: async (parent, { bookId }, context) => {
-      const user = User.findByIdAndDelete(
-        { _id: context.user._id },
-        { $pull: { savedBooks: { bookId: bookId } } },
-        { new: true }
-      );
+      if (context.user) {
+        const user = User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedBooks: { bookId: bookId } } },
+          { new: true }
+        );
+        return user;
+      }
+      throw AuthenticationError;
     },
   },
 };
