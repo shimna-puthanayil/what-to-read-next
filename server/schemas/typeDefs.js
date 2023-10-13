@@ -23,8 +23,7 @@ input BookInput {
     title:String!
   }
   
-type Auth
-{
+type Auth{
     token:ID!
     user:User
 }
@@ -33,7 +32,7 @@ type Query{
 }
 type Mutation{
     addUser(username:String!,email:String!,password:String!):Auth
-    login(username:String!,email:String!,password:String!):Auth
+    login(email:String!,password:String!):Auth
     saveBook(input:BookInput!):User
     removeBook(bookId:String!):User
 }

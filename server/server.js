@@ -18,7 +18,6 @@ const startApolloServer = async () => {
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
-  // app.use("/graphql", expressMiddleware(server));
   app.use(
     "/graphql",
     expressMiddleware(server, {
@@ -33,8 +32,6 @@ const startApolloServer = async () => {
       res.sendFile(path.join(__dirname, "../client/build/index.html"));
     });
   }
-  // app.use(routes);
-
   db.once("open", () => {
     app.listen(PORT, () => {
       console.log(`🌍 Now listening on localhost:${PORT}`);

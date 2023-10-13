@@ -1,4 +1,3 @@
-const { resolveObjMapThunk, isInputType } = require("graphql");
 const { User } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 const Resolvers = {
@@ -21,7 +20,7 @@ const Resolvers = {
       if (!user) {
         throw AuthenticationError;
       }
-      const correctPw = await User.isCorrectPassword(password);
+      const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
         throw AuthenticationError;
       }
@@ -29,7 +28,6 @@ const Resolvers = {
       return { token, user };
     },
     saveBook: async (parent, { input }, context) => {
-      console.log(context.user);
       if (context.user) {
         const user = User.findOneAndUpdate(
           { _id: context.user._id },
