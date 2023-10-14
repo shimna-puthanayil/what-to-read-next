@@ -2,7 +2,7 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-
+//To enable interaction with our GraphQL API on the front end, we utilize these tools to develop the client-side behavior
 import {
   ApolloClient,
   InMemoryCache,
@@ -35,6 +35,7 @@ const client = new ApolloClient({
 
 function App() {
   return (
+    // Wrap the component tree with the ApolloProvider component to enable access to the ApolloClient from anywhere within the application
     <ApolloProvider client={client}>
       <Navbar />
       <Outlet />

@@ -16,6 +16,7 @@ module.exports = {
     let token = req.query.token || req.headers.authorization;
 
     // ["Bearer", "<tokenvalue>"]
+    // We split the token string into an array and return actual token
     if (req.headers.authorization) {
       token = token.split(" ").pop().trim();
     }
@@ -31,6 +32,7 @@ module.exports = {
     } catch {
       console.log("Invalid token");
     }
+    // return the request object so it can be passed to the resolver as `context`
     return req;
   },
   signToken: function ({ username, email, _id }) {

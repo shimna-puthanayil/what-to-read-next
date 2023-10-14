@@ -1,7 +1,7 @@
 import { Container, Card, Button, Row, Col } from "react-bootstrap";
 
 import { removeBookId } from "../utils/localStorage";
-
+//import useQuery,GET_ME, useMutation and REMOVE_BOOK
 import { useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import { useMutation } from "@apollo/client";
