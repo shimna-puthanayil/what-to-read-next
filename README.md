@@ -15,7 +15,6 @@ This application is a Google Books API search using GraphQL API built with Apoll
   ```
   npm i
   ```
-![Screen Shot 2023-10-21 at 8 52 12 pm](https://github.com/shimna-puthanayil/what-to-read-next/assets/132061805/101e47a7-4fce-418e-a756-10228b111669)
 
 ## Usage
 
